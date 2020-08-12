@@ -26,18 +26,21 @@ const posts = [
 		title: 'My first Post',
 		body: 'this is my first post using graphql',
 		published: true,
+		author: '1',
 	},
 	{
 		id: '2',
 		title: 'My Secong Post',
 		body: 'this is my second post using graphql',
 		published: false,
+		author: '1',
 	},
 	{
 		id: '3',
 		title: 'My third Post',
 		body: 'this is my third post using graphql',
 		published: true,
+		author: '2',
 	},
 ]
 // Type definitions (schema)
@@ -54,6 +57,8 @@ const typeDefs = `
 		name: String!
 		email: String!
 		age: Int
+	
+
 	}
 
 	type Post {
@@ -61,6 +66,7 @@ const typeDefs = `
 		title: String!
 		body: String!
 		published: Boolean!
+		author: User!
 	}
 `
 
@@ -90,6 +96,13 @@ const resolvers = {
 				email: 'dem@test.com',
 				age: 28,
 			}
+		},
+	},
+	Post: {
+		author(parent, args, ctx, info) {
+			return users.find((user) => {
+				return user.id === parent.author
+			})
 		},
 	},
 }
