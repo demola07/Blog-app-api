@@ -22,27 +22,51 @@ const users = [
 
 const posts = [
 	{
-		id: '1',
+		id: '11',
 		title: 'My first Post',
 		body: 'this is my first post using graphql',
 		published: true,
 		author: '1',
 	},
 	{
-		id: '2',
+		id: '21',
 		title: 'My Secong Post',
 		body: 'this is my second post using graphql',
 		published: false,
 		author: '1',
 	},
 	{
-		id: '3',
+		id: '31',
 		title: 'My third Post',
 		body: 'this is my third post using graphql',
 		published: true,
 		author: '2',
 	},
 ]
+
+const comments = [
+	{
+		id: '111',
+		text: 'First comment',
+		author: '1',
+	},
+	{
+		id: '222',
+		text: 'second comment',
+		author: '1',
+	},
+	{
+		id: '333',
+		text: 'Third comment',
+		author: '2',
+	},
+	{
+		id: '444',
+		text: 'Fourth comment',
+		author: '3',
+	},
+]
+
 // Type definitions (schema)
 const typeDefs = `
     type Query {
@@ -50,6 +74,7 @@ const typeDefs = `
 		posts(query: String): [Post!]!
 		me: User!
 		post: Post!
+		comments: [Comment!]!
 	}
 	
 	type User {
@@ -57,7 +82,8 @@ const typeDefs = `
 		name: String!
 		email: String!
 		age: Int
-	
+		posts: [Post!]!
+		comments: [Comment!]!
 
 	}
 
@@ -66,6 +92,12 @@ const typeDefs = `
 		title: String!
 		body: String!
 		published: Boolean!
+		author: User!
+	}
+
+	type Comment {
+		id: ID!
+		text: String!
 		author: User!
 	}
 `
@@ -97,8 +129,30 @@ const resolvers = {
 				age: 28,
 			}
 		},
+		comments(parent, args, ctx, info) {
+			return comments
+		},
 	},
 	Post: {
+		author(parent, args, ctx, info) {
+			return users.find((user) => {
+				return user.id === parent.author
+			})
+		},
+	},
+	User: {
+		posts(parent, args, ctx, info) {
+			return posts.filter((post) => {
+				return post.author === parent.id
+			})
+		},
+		comments(parent, args, ctx, info) {
+			return comments.filter((comment) => {
+				return comment.author === parent.id
+			})
+		},
+	},
+	Comment: {
 		author(parent, args, ctx, info) {
 			return users.find((user) => {
 				return user.id === parent.author
