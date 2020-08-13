@@ -5,7 +5,7 @@ const Post = {
 		})
 	},
 	comments(parent, args, { db }, info) {
-		return db.vcomments.filter((comment) => {
+		return db.comments.filter((comment) => {
 			return comment.post === parent.id
 		})
 	},
