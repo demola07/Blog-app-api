@@ -20,21 +20,21 @@ const users = [
 
 const posts = [
 	{
-		id: '11',
+		id: '10',
 		title: 'My first Post',
 		body: 'this is my first post using graphql',
 		published: true,
 		author: '1',
 	},
 	{
-		id: '21',
+		id: '20',
 		title: 'My Secong Post',
 		body: 'this is my second post using graphql',
 		published: false,
 		author: '2',
 	},
 	{
-		id: '31',
+		id: '30',
 		title: 'My third Post',
 		body: 'this is my third post using graphql',
 		published: true,
@@ -44,28 +44,28 @@ const posts = [
 
 const comments = [
 	{
-		id: '111',
+		id: '100',
 		text: 'First comment',
 		author: '1',
-		post: '11',
+		post: '10',
 	},
 	{
-		id: '222',
+		id: '200',
 		text: 'second comment',
 		author: '1',
-		post: '11',
+		post: '10',
 	},
 	{
-		id: '333',
+		id: '300',
 		text: 'Third comment',
 		author: '2',
-		post: '21',
+		post: '20',
 	},
 	{
-		id: '444',
+		id: '400',
 		text: 'Fourth comment',
 		author: '1',
-		post: '31',
+		post: '30',
 	},
 ]
 
