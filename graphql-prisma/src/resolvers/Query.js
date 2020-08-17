@@ -35,16 +35,8 @@ const Query = {
 
 		return prisma.query.posts(opArgs, info)
 	},
-	me() {
-		return {
-			id: '123098',
-			name: 'Ademola',
-			email: 'dem@test.com',
-			age: 28,
-		}
-	},
-	comments(parent, args, { db }, info) {
-		return db.comments
+	comments(parent, args, { prisma }, info) {
+		return prisma.query.comments(info)
 	},
 }
 
