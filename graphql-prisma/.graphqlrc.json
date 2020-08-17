@@ -1,7 +1,7 @@
 {
 	"projects": {
 		"default": {
-			"schema": "http://localhost:4466",
+			"schema": "prisma/prisma.yml",
 			"extensions": {
 				"codegen": {
 					"generates": {
