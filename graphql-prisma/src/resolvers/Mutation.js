@@ -1,5 +1,4 @@
 import bcrypt from 'bcryptjs'
-import jwt from 'jsonwebtoken'
 
 import getUserId from '../utils/getUserId'
 import generateJwt from '../utils/generateJwt'
