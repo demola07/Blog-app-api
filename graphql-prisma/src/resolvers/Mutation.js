@@ -2,14 +2,11 @@ import bcrypt from 'bcryptjs'
 
 import getUserId from '../utils/getUserId'
 import generateJwt from '../utils/generateJwt'
+import hashPassword from '../utils/hashPassword'
 
 const Mutation = {
 	async createUser(parent, args, { prisma }, info) {
-		if (args.data.password.length < 8) {
-			throw new Error('Password must be 8 characters or longer')
-		}
-
-		const hashedPassword = await bcrypt.hash(args.data.password, 12)
+		const hashedPassword = await hashPassword(args.data.password)
 
 		const emailTaken = await prisma.exists.User({ email: args.data.email })
 
@@ -63,6 +60,10 @@ const Mutation = {
 
 		if (!userExists) {
 			throw new Error('User not found')
+		}
+
+		if (typeof args.data.password === 'string') {
+			args.data.password = await hashPassword(args.data.password)
 		}
 
 		return prisma.mutation.updateUser(
