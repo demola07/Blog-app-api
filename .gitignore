@@ -1,4 +1,5 @@
 node_modules
 prisma/docker-compose.yml
 config/prod.env
+config/dev.env 
 dist/
